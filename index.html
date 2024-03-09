@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- HEAD -->
+<head>
+
+  <meta charset="utf-8">
+  <title>Kim's Website</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+  <!-- 스타일 -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Sacramento" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+</head>
+
+
+<!-- BODY -->
+<body>
+
+  <div class="top-container">
+    
+    <a href="https://blog.naver.com/ehdwns778"> <img class="blog" src="images/blog.png" alt="blog"></a>
+
+    <img class="top-cloud" src="images/cloud.png" alt="cloud">
+    <div class="title-text">
+      <h1>I'm Dong Jun Kim.</h1>
+      <h2>a <span class="pro">pro</span>grammer.</h2>
+    </div>
+    <img class="bottom-cloud" src="images/cloud.png" alt="cloud">
+    <img class="mountain" src="images/mountain.png" alt="mountain-img">
+  </div>
+
+
+  <div class="middle-container">
+
+    <div class="profile">
+      <img class="profile_image" src="images/Kim.png" alt="Kim-profile-img">
+      <h2>Hello.</h2>
+      <p class="intro">I hope to<br><strong>Frontend Developer</strong>,<br> <strong>Game Programmer</strong>.<br>I ❤️ to do work out on my free time.</p>
+    </div>
+
+    <hr>
+
+    <div class="skills">
+      <h2>My Skills.</h2>
+      <div class="skill-row">
+        <img class="code-img" src="images/code.png" alt="code-img">
+
+        <h3>Design & Development</h3>
+        <p>I started learning to code when I was 23 years old because I wanted to make my own video games. Over time, I have gained a wealth of interested designing and developing web applications.</p>
+
+      </div>
+
+      <div class="skill-row">
+        <img class="dumbell-img" src="images/dumbell.png" alt="dumbell-img">
+
+        <h3>Work Out</h3>
+        <p>I love to do work out on everyday. Through work out, my physical strength has improved and my relationship with people has improved</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="Portfolio">
+
+      <h2>My Portfolio.</h2>
+
+      <div class="portfolio">
+        
+        <py-script>
+
+          import random
+
+          # html ID "input_text"와 "output_text" 와 연결된 객체 생성
+          # input_text = Element("input_text")
+          output_text = Element("output_text")
+
+          # html 에서 생성한 ID "add_text" 의 버튼이 눌렸을 때 호출될 pys-onClick 인자로 설정된 함수 생성
+          def function_add_text(*args):
+            # output_text 객체의 text 값을 input_text의 값으로 지정
+            lotto_numbers = random.sample(range(1, 46), 6)
+            output_text.element.innerText = sorted(lotto_numbers)
+
+          # 함수가 실행된 후 input_text의 값을 초기화
+          # input_text.clear()
+
+        </py-script>
+
+        <label for="label">로또 번호 추첨기</label>
+        
+        <h3 id = "output_text"></h3>
+        <button id="btn" pys-onClick ="function_add_text">Click</button>        
+
+      </div>
+
+
+      <div class="data">
+
+        <a href="data.html" target="_blank">오늘의 정보 보러가기</a>
+        
+      </div>
+
+
+    </div>
+
+
+    <hr>
+    <div class="contact-me">
+      <h2>Get In Touch</h2>
+      <h3>If you're interested in me.</h3>
+      <p class="contact-message">Contact me blog comment or phone number.</p>
+      
+      <!--
+      <a class="btn" href="">CONTACT ME</a>
+      -->
+
+    </div>
+    
+  </div>
+
+
+  <div class="bottom-container">
+    <a class="footer-link" href="https://blog.naver.com/ehdwns778">Blog</a>
+    <a class="footer-link" href="https://www.instagram.com/98_02_07_/">Instagram</a>
+    <p class="copyright">© 2024 Designed By Kim Dong Jun</p>
+  </div>
+
+</body>
+
+</html>

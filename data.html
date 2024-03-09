@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+
+<!-- HEAD -->
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Kim's Website</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+
+  <!-- 스타일 -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Sacramento" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+  <!--
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<!-- BODY -->
+
+<body>
+
+  <!-- TOP -->
+  <div class="top-container_2">
+
+    <img class="favicon_img" src="favicon.ico">
+    <a href="data.html">Kim's Website</a>
+
+  </div>
+
+
+  <!-- MIDDLE(api 출력) -->
+  <div class="middle-container_2">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <div class="cloud_image">
+      <img class="mountain" src="images/mountain.png" alt="mountain-img">
+    </div>
+
+
+    <!-- 영화 순위 api -->
+    <script>
+      function movie_Onclick() {
+        var arr = new Array();
+        var movie = document.getElementById("arrayList");
+
+        let API_key = "911d363b9e2aeaf81e8d461a7bd35ab7"
+        let today = new Date()
+        let year = today.getFullYear().toString(); // 년
+        let month = (("0" + (today.getMonth() + 1)).slice(-2)).toString(); // 월
+        let day = (("0" + (today.getDate() - 1)).slice(-2)).toString();  // 일
+
+        // if(day == 0) {
+        //   day = "01";
+        // }
+
+        let date = year + month + day
+
+        var namehead = document.getElementById("namehead");
+        namehead.innerText = today.toLocaleDateString() + " 영화 순위"
+
+        $.ajax({
+          type: "GET",
+          url: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+          data: {
+            key: "911d363b9e2aeaf81e8d461a7bd35ab7",
+            targetDt: date
+          }
+        })
+          .done(function (msg) {
+            for (let i = 0; i < 10; i++) {
+              arr[i] = msg.boxOfficeResult.dailyBoxOfficeList[i].movieNm
+            }
+
+            movie.style.display = 'block'
+            document.querySelector('.weatherIcon').style.display = 'none'
+            document.getElementById("dust_text").style.display = 'none'
+            document.getElementById("weather_text").style.display = 'none'
+
+            // arr.forEach(function (item) {
+            //   var li = document.createElement("li");
+            //   li.innerHTML = item;
+            //   movie.appendChild(li);
+            // });
+
+            document.getElementById("1").style.display = 'block'
+            document.getElementById("2").style.display = 'block'
+            document.getElementById("3").style.display = 'block'
+            document.getElementById("4").style.display = 'block'
+            document.getElementById("5").style.display = 'block'
+            document.getElementById("6").style.display = 'block'
+            document.getElementById("7").style.display = 'block'
+            document.getElementById("8").style.display = 'block'
+            document.getElementById("9").style.display = 'block'
+            document.getElementById("10").style.display = 'block'
+            document.getElementById("1").innerText = "1. " + arr[0]
+            document.getElementById("2").innerText = "2. " + arr[1]
+            document.getElementById("3").innerText = "3. " + arr[2]
+            document.getElementById("4").innerText = "4. " + arr[3]
+            document.getElementById("5").innerText = "5. " + arr[4]
+            document.getElementById("6").innerText = "6. " + arr[5]
+            document.getElementById("7").innerText = "7. " + arr[6]
+            document.getElementById("8").innerText = "8. " + arr[7]
+            document.getElementById("9").innerText = "9. " + arr[8]
+            document.getElementById("10").innerText = "10. " + arr[9]
+
+
+          });
+      }
+    </script>
+
+
+    <!-- 미세먼지 api -->
+    <script>
+      function dust_Onclick() {
+
+        var namehead = document.getElementById("namehead");
+        namehead.innerText = "실시간 미세먼지"
+
+        $.ajax({
+          type: "GET",
+          url: "http://openAPI.seoul.go.kr:8088/734f50696d65686438316359586c55/json/ListAvgOfSeoulAirQualityService/1/5/"
+        })
+          .done(function (msg) {
+            var MSRDATE = new Date().toLocaleString()
+            var GRADE = msg.ListAvgOfSeoulAirQualityService.row[0].GRADE
+            var OZONE = msg.ListAvgOfSeoulAirQualityService.row[0].OZONE
+            var CARBON = msg.ListAvgOfSeoulAirQualityService.row[0].CARBON
+            var PM10 = msg.ListAvgOfSeoulAirQualityService.row[0].PM10
+            var PM25 = msg.ListAvgOfSeoulAirQualityService.row[0].PM25
+
+            let div = document.getElementById("dust_text");
+
+            div.style.display = 'block'
+            document.querySelector('.weatherIcon').style.display = 'none'
+            document.getElementById("arrayList").style.display = 'none'
+            document.getElementById("weather_text").style.display = 'none'
+
+            let text = document.createTextNode("측정 날짜 : " + MSRDATE + '\n' + "통합대기환경지수 등급 : " + GRADE);
+            div.innerHTML = `측정 날짜 : ${MSRDATE} <br> 통합대기환경지수 등급 : ${GRADE} <br> 
+            오존 : ${OZONE} <br> 일산화탄소 : ${CARBON} <br> 미세먼지 : ${PM10} <br> 초미세먼지 : ${PM25}`;
+
+          });
+      }
+    </script>
+
+
+    <!-- 날씨 api -->
+    <script>
+      function weather_Onclick() {
+
+        var namehead = document.getElementById("namehead");
+        namehead.innerText = "실시간 날씨"
+        var weatherIconImg = document.querySelector('.weatherIcon')
+
+        $.ajax({
+          type: "GET",
+          url: "https://api.openweathermap.org/data/2.5/weather",
+          data: {
+            lat: "37.5683",
+            lon: "126.9778",
+            appid: "a7132cbdac862da8ce2cf77c7e06955e",
+            units: "metric"
+          }
+        })
+          .done(function (msg) {
+            var city = msg.name
+            var description = msg.weather[0].description
+            var temp = msg.main.temp
+            var temp_min = msg.main.temp_min
+            var temp_max = msg.main.temp_max
+            var humidity = msg.main.humidity
+            var pressure = msg.main.pressure
+            var weatherIcon = msg.weather[0].icon
+            var weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+
+            let div = document.getElementById("weather_text");
+
+            div.style.display = 'block'
+            document.querySelector('.weatherIcon').style.display = 'block'
+            document.getElementById("arrayList").style.display = 'none'
+            document.getElementById("dust_text").style.display = 'none'
+
+            weatherIconImg.setAttribute('src', weatherIconAdrs);
+
+            let text = document.createTextNode("지역 : " + city);
+            div.innerHTML = `지역 : ${city} <br> 날씨 : ${description} <br> 기온 : ${temp} <br> 최저기온 : ${temp_min} <br> 
+            최고기온 : ${temp_max} <br> 습도 : ${humidity} <br> 기압 : ${pressure}`;
+
+          });
+      }
+    </script>
+
+
+    <!-- 버튼 -->
+    <button onclick="movie_Onclick()" class="btn_2">Movie</button>
+    <button onclick="dust_Onclick()" class="btn_2">Dust</button>
+    <button onclick="weather_Onclick()" class="btn_2">Weather</button>
+    <button class="btn_2" onClick="location.href='http://www.naver.com'">Naver</button>
+    <button class="btn_2" onClick="location.href='http://www.youtube.com'">Youtube</button>
+    <hr class="data_hr">
+
+
+    <!-- 정보 출력 -->
+    <div class="inner_container">
+      <h3 id="namehead"></h3>
+      <ol id="arrayList">
+        <li id="1" style="display: none;"></li>
+        <li id="2" style="display: none;"></li>
+        <li id="3" style="display: none;"></li>
+        <li id="4" style="display: none;"></li>
+        <li id="5" style="display: none;"></li>
+        <li id="6" style="display: none;"></li>
+        <li id="7" style="display: none;"></li>
+        <li id="8" style="display: none;"></li>
+        <li id="9" style="display: none;"></li>
+        <li id="10" style="display: none;"></li>
+      </ol>
+      <div id="dust_text"></div>
+      <img class="weatherIcon">
+      <div id="weather_text"></div>
+    </div>
+
+    <br>
+
+    <!-- 하단 api -->
+    <form action="#">
+      <select name="selectName" id="selectName">
+        <option value="code">종목코드</option>
+        <option value="name">종목명</option>
+      </select>
+      <input id="cname" type="text" required>
+      <button class="btn_2" onclick="stock_Onclick()">데이터 가져오기</button>
+    </form>
+
+
+    <!-- 차트를 표시할 div -->
+    <canvas id="stockChart" width="500" height="300"></canvas>
+
+    <!-- 실시간 데이터를 가져와 차트를 업데이트하는 JavaScript 코드 -->
+    <script>
+
+      function stock_Onclick() {
+
+        var today = new Date()
+        var year = today.getFullYear().toString(); // 년
+        var month = (("0" + (today.getMonth() + 1)).slice(-2)).toString(); // 월
+        var day = (("0" + (today.getDate() - 1)).slice(-2)).toString();  // 일
+
+        var date = year + month + day
+
+        var day_1 = today.getDate() - 1 // 2일 전
+        var day_2 = today.getDate() - 2 // 3일 전
+        var day_3 = today.getDate() - 3 // 4일 전
+        var day_4 = today.getDate() - 4 // 5일 전
+        var day_5 = today.getDate() - 5 // 6일 전
+        var day_6 = today.getDate() - 6 // 7일 전
+        var day_7 = today.getDate() - 7 // 8일 전
+
+        var date_1;
+        var date_2;
+        var date_3;
+        var date_4;
+        var date_5;
+        var date_6;
+        var date_7;
+
+        var date_1_price;
+        var date_2_price;
+        var date_3_price;
+        var date_4_price;
+        var date_5_price;
+        var date_6_price;
+        var date_7_price;
+
+        var lastDay = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+
+        if (day_1 <= 0) {
+          date_1 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_1).slice(-2)).toString();
+        }
+
+        else {
+          date_1 = year + month + (("0" + day_1).slice(-2)).toString();
+        }
+
+        if (day_2 <= 0) {
+          date_2 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_2).slice(-2)).toString();
+        }
+
+        else {
+          date_2 = year + month + (("0" + day_2).slice(-2)).toString();
+        }
+
+        if (day_3 <= 0) {
+          date_3 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_3).slice(-2)).toString();
+        }
+
+        else {
+          date_3 = year + month + (("0" + day_3).slice(-2)).toString();
+        }
+
+        if (day_4 <= 0) {
+          date_4 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_4).slice(-2)).toString();
+        }
+
+        else {
+          date_4 = year + month + (("0" + day_4).slice(-2)).toString();
+        }
+
+        if (day_5 <= 0) {
+          date_5 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_5).slice(-2)).toString();
+        }
+
+        else {
+          date_5 = year + month + (("0" + day_5).slice(-2)).toString();
+        }
+
+        if (day_6 <= 0) {
+          date_6 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_6).slice(-2)).toString();
+        }
+
+        else {
+          date_6 = year + month + (("0" + day_6).slice(-2)).toString();
+        }
+
+        if (day_7 <= 0) {
+          date_7 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_7).slice(-2)).toString();
+        }
+
+        else {
+          date_7 = year + month + (("0" + day_7).slice(-2)).toString();
+        }
+
+
+        // 종목코드, 종목명 선택 값 가져오기
+        var selectOption = document.getElementById('selectName');
+        var selectedIndex = selectOption.selectedIndex;
+        var user_choice = selectOption.options[selectedIndex].value;
+
+        // 입력값 가져오기
+        var inputText = document.getElementById('cname').value;
+
+        // 종목코드 입력 확인 조건
+        if (user_choice == "code") {
+
+          if (inputText.length > 6 || inputText.length < 6) {
+            alert("종목코드 6자리를 다시 입력해주세요.")
+          }
+
+          else {
+
+            new Promise((succ, fail) => {
+
+              $.ajax({
+                type: "GET",
+                url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                data: {
+                  likeBasDt: date_2,
+                  likeSrtnCd: inputText
+                }
+              })
+                .done(function (msg) {
+                  date_2_price = parseInt(msg.response.body.items.item[0].clpr)
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      likeBasDt: date_3,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      date_3_price = parseInt(msg.response.body.items.item[0].clpr)
+                    })
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      likeBasDt: date_4,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      date_4_price = parseInt(msg.response.body.items.item[0].clpr)
+                    })
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      likeBasDt: date_5,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      date_5_price = parseInt(msg.response.body.items.item[0].clpr)
+                    })
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      // likeBasDt: date,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      console.log(msg)
+                      console.log(parseInt(msg.response.body.items.item[0].clpr) - parseInt(msg.response.body.items.item[0].vs))
+
+                      // 가상의 주식 데이터
+                      const stockData = {
+                        labels: [date_5, date_4, date_3, date_2, date_1],
+                        datasets: [{
+                          label: msg.response.body.items.item[0].itmsNm + " 주봉(전일 대비 " + msg.response.body.items.item[0].vs + ")",
+                          backgroundColor: 'rgb(255, 99, 132)',
+                          borderColor: 'rgb(255, 99, 132)',
+                          data: [
+                            date_5_price,
+                            date_4_price,
+                            date_3_price,
+                            date_2_price - parseInt(msg.response.body.items.item[0].vs),
+                            parseInt(msg.response.body.items.item[0].clpr)],
+                        }]
+                      };
+
+                      // 차트 생성
+                      const ctx = document.getElementById('stockChart').getContext('2d');
+                      const myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: stockData,
+                        options: { responsive: false }
+                      });
+                    })
+                });
+            });
+          }
+
+        }
+
+
+        // 종목명 입력 확인 조건
+        else {
+
+          new Promise((succ, fail) => {
+
+            $.ajax({
+              type: "GET",
+              url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+              data: {
+                likeBasDt: date_2,
+                likeItmsNm: inputText
+              }
+            })
+              .done(function (msg) {
+                date_2_price = parseInt(msg.response.body.items.item[0].clpr)
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    likeBasDt: date_3,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    date_3_price = parseInt(msg.response.body.items.item[0].clpr)
+                  })
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    likeBasDt: date_4,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    date_4_price = parseInt(msg.response.body.items.item[0].clpr)
+                  })
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    likeBasDt: date_5,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    date_5_price = parseInt(msg.response.body.items.item[0].clpr)
+                  })
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    // likeBasDt: date,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    console.log(msg)
+                    console.log(parseInt(msg.response.body.items.item[0].clpr) - parseInt(msg.response.body.items.item[0].vs))
+
+                    // 가상의 주식 데이터
+                    const stockData = {
+                      labels: [date_5, date_4, date_3, date_2, date_1],
+                      datasets: [{
+                        label: msg.response.body.items.item[0].itmsNm + " 주봉(전일 대비 " + msg.response.body.items.item[0].vs + ")",
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: [
+                          date_5_price,
+                          date_4_price,
+                          date_3_price,
+                          date_2_price - parseInt(msg.response.body.items.item[0].vs),
+                          parseInt(msg.response.body.items.item[0].clpr)],
+                      }]
+                    };
+
+                    // 차트 생성
+                    const ctx = document.getElementById('stockChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                      type: 'line',
+                      data: stockData,
+                      options: { responsive: false }
+                    });
+                  })
+              });
+          });
+        }
+
+      }
+
+      // // 실시간 데이터 가져오기
+      // function fetchData() {
+      //   // 실제 데이터를 가져오는 코드를 작성
+      //   // 예시로 임의의 데이터를 생성하여 사용
+      //   const x = [], y = [];
+      //   for (let i = 0; i < 100; i++) {
+      //     x.push(i);
+      //     y.push(Math.random() * 10);
+      //   }
+      //   return { x, y };
+      // }
+
+      // // 차트 업데이트 함수
+      // function updateChart() {
+      //   const data = fetchData();
+
+      //   // Plotly를 사용하여 차트를 그립니다.
+      //   Plotly.newPlot('chart', [{
+      //     x: data.x,
+      //     y: data.y,
+      //     type: 'scatter',
+      //     mode: 'lines+markers',
+      //     marker: {
+      //       color: 'red'
+      //     },
+      //   }],
+      //     {
+      //       title: '실시간 주식 차트', // 차트 제목
+      //       xaxis: { title: '일자' }, // x 축 제목
+      //       yaxis: { title: '가격' } // y 축 제목
+      //     });
+      // }
+
+      // // 일정 시간마다 차트 업데이트
+      // setInterval(updateChart, 10000); // 3초마다 업데이트 (1000 = 1초)
+
+      // // 초기에 한 번 차트 업데이트
+      // updateChart();
+
+    </script>
+
+  </div>
+
+
+  <!-- BOTTOM -->
+  <div class="bottom-container_2">
+
+    <a class="footer-link" href="https://blog.naver.com/ehdwns778">Blog</a>
+    <a class="footer-link" href="https://www.instagram.com/98_02_07_/">Instagram</a>
+    <p class="copyright">© 2024 Designed By Kim Dong Jun</p>
+
+  </div>
+
+</body>
+
+</html>
