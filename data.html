@@ -255,17 +255,17 @@
         var today = new Date()
         var year = today.getFullYear().toString(); // 년
         var month = (("0" + (today.getMonth() + 1)).slice(-2)).toString(); // 월
-        var day = (("0" + (today.getDate() - 1)).slice(-2)).toString();  // 일
+        var day = (("0" + (today.getDate())).slice(-2)).toString();  // 일
 
         var date = year + month + day
 
-        var day_1 = today.getDate() - 1 // 2일 전
-        var day_2 = today.getDate() - 2 // 3일 전
-        var day_3 = today.getDate() - 3 // 4일 전
-        var day_4 = today.getDate() - 4 // 5일 전
-        var day_5 = today.getDate() - 5 // 6일 전
-        var day_6 = today.getDate() - 6 // 7일 전
-        var day_7 = today.getDate() - 7 // 8일 전
+        var day_1 = today.getDate() - 1 // 1일 전
+        var day_2 = today.getDate() - 2 // 2일 전
+        var day_3 = today.getDate() - 3 // 3일 전
+        var day_4 = today.getDate() - 4 // 4일 전
+        var day_5 = today.getDate() - 5 // 5일 전
+        var day_6 = today.getDate() - 6 // 6일 전
+        var day_7 = today.getDate() - 7 // 7일 전
 
         var date_1;
         var date_2;
@@ -274,6 +274,22 @@
         var date_5;
         var date_6;
         var date_7;
+
+        var date_1_label;
+        var date_2_label;
+        var date_3_label;
+        var date_4_label;
+        var date_5_label;
+        var date_6_label;
+        var date_7_label;
+
+        var date_1_Week;
+        var date_2_Week;
+        var date_3_Week;
+        var date_4_Week;
+        var date_5_Week;
+        var date_6_Week;
+        var date_7_Week;
 
         var date_1_price;
         var date_2_price;
@@ -285,60 +301,293 @@
 
         var lastDay = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
 
+
+        // 7일 전까지의 날짜 담기
+        // 월 말 판단
         if (day_1 <= 0) {
-          date_1 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_1).slice(-2)).toString();
+
+          date_1_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_1).slice(-2)).toString();
+
+          date_1_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_1).slice(-2)).toString()).getDay();
+
+          if (date_1_Week == 0) {
+            date_1 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_1 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_1_Week == 6) {
+            date_1 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_1 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_1 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_1)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_1 = year + month + (("0" + day_1).slice(-2)).toString();
+
+          date_1_label = year + month + (("0" + day_1).slice(-2)).toString();
+
+          date_1_Week = new Date(year + "-" + month + "-" + (("0" + day_1).slice(-2)).toString()).getDay();
+
+          if (date_1_Week == 0) {
+            date_1 = year + month + (("0" + (day_1 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_1_Week == 6) {
+            date_1 = year + month + (("0" + (day_1 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_1 = year + month + (("0" + day_1).slice(-2)).toString()
+          }
+
         }
+
 
         if (day_2 <= 0) {
-          date_2 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_2).slice(-2)).toString();
+
+          date_2_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_2).slice(-2)).toString();
+
+          date_2_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_2).slice(-2)).toString()).getDay();
+
+          if (date_2_Week == 0) {
+            date_2 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_2 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_2_Week == 6) {
+            date_2 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_2 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_2 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_2)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_2 = year + month + (("0" + day_2).slice(-2)).toString();
+
+          date_2_label = year + month + (("0" + day_2).slice(-2)).toString();
+
+          date_2_Week = new Date(year + "-" + month + "-" + (("0" + day_2).slice(-2)).toString()).getDay();
+
+          if (date_2_Week == 0) {
+            date_2 = year + month + (("0" + (day_2 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_2_Week == 6) {
+            date_2 = year + month + (("0" + (day_2 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_2 = year + month + (("0" + day_2).slice(-2)).toString()
+          }
+
         }
+
 
         if (day_3 <= 0) {
-          date_3 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_3).slice(-2)).toString();
+
+          date_3_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_3).slice(-2)).toString();
+
+          date_3_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_3).slice(-2)).toString()).getDay();
+
+          if (date_3_Week == 0) {
+            date_3 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_3 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_3_Week == 6) {
+            date_3 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_3 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_3 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_3)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_3 = year + month + (("0" + day_3).slice(-2)).toString();
+
+          date_3_label = year + month + (("0" + day_3).slice(-2)).toString();
+
+          date_3_Week = new Date(year + "-" + month + "-" + (("0" + day_3).slice(-2)).toString()).getDay();
+
+          if (date_3_Week == 0) {
+            date_3 = year + month + (("0" + (day_3 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_3_Week == 6) {
+            date_3 = year + month + (("0" + (day_3 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_3 = year + month + (("0" + day_3).slice(-2)).toString()
+          }
+
         }
+
 
         if (day_4 <= 0) {
-          date_4 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_4).slice(-2)).toString();
+
+          date_4_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_4).slice(-2)).toString();
+
+          date_4_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_4).slice(-2)).toString()).getDay();
+
+          if (date_4_Week == 0) {
+            date_4 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_4 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_4_Week == 6) {
+            date_4 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_4 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_4 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_4)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_4 = year + month + (("0" + day_4).slice(-2)).toString();
+
+          date_4_label = year + month + (("0" + day_4).slice(-2)).toString();
+
+          date_4_Week = new Date(year + "-" + month + "-" + (("0" + day_4).slice(-2)).toString()).getDay();
+
+          if (date_4_Week == 0) {
+            date_4 = year + month + (("0" + (day_4 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_4_Week == 6) {
+            date_4 = year + month + (("0" + (day_4 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_4 = year + month + (("0" + day_4).slice(-2)).toString()
+          }
+
         }
+
 
         if (day_5 <= 0) {
-          date_5 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_5).slice(-2)).toString();
+
+          date_5_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_5).slice(-2)).toString();
+
+          date_5_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_5).slice(-2)).toString()).getDay();
+
+          if (date_5_Week == 0) {
+            date_5 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_5 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_5_Week == 6) {
+            date_5 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_5 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_5 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_5)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_5 = year + month + (("0" + day_5).slice(-2)).toString();
+
+          date_5_label = year + month + (("0" + day_5).slice(-2)).toString();
+
+          date_5_Week = new Date(year + "-" + month + "-" + (("0" + day_5).slice(-2)).toString()).getDay();
+
+          if (date_5_Week == 0) {
+            date_5 = year + month + (("0" + (day_5 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_5_Week == 6) {
+            date_5 = year + month + (("0" + (day_5 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_5 = year + month + (("0" + day_5).slice(-2)).toString()
+          }
+
         }
+
 
         if (day_6 <= 0) {
-          date_6 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_6).slice(-2)).toString();
+
+          date_6_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_6).slice(-2)).toString();
+
+          date_6_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_6).slice(-2)).toString()).getDay();
+
+          if (date_6_Week == 0) {
+            date_6 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_6 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_6_Week == 6) {
+            date_6 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_6 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_6 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_6)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_6 = year + month + (("0" + day_6).slice(-2)).toString();
+
+          date_6_label = year + month + (("0" + day_6).slice(-2)).toString();
+
+          date_6_Week = new Date(year + "-" + month + "-" + (("0" + day_6).slice(-2)).toString()).getDay();
+
+          if (date_6_Week == 0) {
+            date_6 = year + month + (("0" + (day_6 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_6_Week == 6) {
+            date_6 = year + month + (("0" + (day_6 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_6 = year + month + (("0" + day_6).slice(-2)).toString()
+          }
+
         }
+
 
         if (day_7 <= 0) {
-          date_7 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_7).slice(-2)).toString();
+
+          date_7_label = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + lastDay + day_7).slice(-2)).toString();
+
+          date_7_Week = new Date(year + "-" + (("0" + today.getMonth()).slice(-2)).toString() + "-" + (("0" + lastDay + day_7).slice(-2)).toString()).getDay();
+
+          if (date_7_Week == 0) {
+            date_7 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_7 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_7_Week == 6) {
+            date_7 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_7 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_7 = year + (("0" + today.getMonth()).slice(-2)).toString() + (("0" + (lastDay + day_7)).slice(-2)).toString();
+          }
+
         }
 
         else {
-          date_7 = year + month + (("0" + day_7).slice(-2)).toString();
+
+          date_7_label = year + month + (("0" + day_7).slice(-2)).toString();
+
+          date_7_Week = new Date(year + "-" + month + "-" + (("0" + day_7).slice(-2)).toString()).getDay();
+
+          if (date_7_Week == 0) {
+            date_7 = year + month + (("0" + (day_7 - 2)).slice(-2)).toString()
+          }
+
+          else if (date_7_Week == 6) {
+            date_7 = year + month + (("0" + (day_7 - 1)).slice(-2)).toString()
+          }
+
+          else {
+            date_7 = year + month + (("0" + day_7).slice(-2)).toString()
+          }
+
         }
 
 
@@ -365,12 +614,12 @@
                 type: "GET",
                 url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
                 data: {
-                  likeBasDt: date_2,
+                  likeBasDt: date_7,
                   likeSrtnCd: inputText
                 }
               })
                 .done(function (msg) {
-                  date_2_price = parseInt(msg.response.body.items.item[0].clpr)
+                  date_7_price = parseInt(msg.response.body.items.item[0].clpr)
                 })
 
 
@@ -379,27 +628,12 @@
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
                     data: {
-                      likeBasDt: date_3,
+                      likeBasDt: date_6,
                       likeSrtnCd: inputText
                     }
                   })
                     .done(function (msg) {
-                      date_3_price = parseInt(msg.response.body.items.item[0].clpr)
-                    })
-                })
-
-
-                .then((arg) => {
-                  $.ajax({
-                    type: "GET",
-                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
-                    data: {
-                      likeBasDt: date_4,
-                      likeSrtnCd: inputText
-                    }
-                  })
-                    .done(function (msg) {
-                      date_4_price = parseInt(msg.response.body.items.item[0].clpr)
+                      date_6_price = parseInt(msg.response.body.items.item[0].clpr)
                     })
                 })
 
@@ -424,27 +658,73 @@
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
                     data: {
-                      // likeBasDt: date,
+                      likeBasDt: date_4,
                       likeSrtnCd: inputText
                     }
                   })
                     .done(function (msg) {
-                      console.log(msg)
-                      console.log(parseInt(msg.response.body.items.item[0].clpr) - parseInt(msg.response.body.items.item[0].vs))
+                      date_4_price = parseInt(msg.response.body.items.item[0].clpr)
+                    })
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      likeBasDt: date_3,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      date_3_price = parseInt(msg.response.body.items.item[0].clpr)
+                    })
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      likeBasDt: date_2,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      date_2_price = parseInt(msg.response.body.items.item[0].clpr)
+                    })
+                })
+
+
+                .then((arg) => {
+                  $.ajax({
+                    type: "GET",
+                    url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    data: {
+                      likeBasDt: date_1,
+                      likeSrtnCd: inputText
+                    }
+                  })
+                    .done(function (msg) {
+                      date_1_price = parseInt(msg.response.body.items.item[0].clpr)
 
                       // 가상의 주식 데이터
                       const stockData = {
-                        labels: [date_5, date_4, date_3, date_2, date_1],
+                        labels: [date_7_label, date_6_label, date_5_label, date_4_label, date_3_label, date_2_label, date_1_label],
                         datasets: [{
                           label: msg.response.body.items.item[0].itmsNm + " 주봉(전일 대비 " + msg.response.body.items.item[0].vs + ")",
                           backgroundColor: 'rgb(255, 99, 132)',
                           borderColor: 'rgb(255, 99, 132)',
                           data: [
+                            date_7_price,
+                            date_6_price,
                             date_5_price,
                             date_4_price,
                             date_3_price,
-                            date_2_price - parseInt(msg.response.body.items.item[0].vs),
-                            parseInt(msg.response.body.items.item[0].clpr)],
+                            date_2_price,
+                            date_1_price],
                         }]
                       };
 
@@ -466,18 +746,19 @@
         // 종목명 입력 확인 조건
         else {
 
+
           new Promise((succ, fail) => {
 
             $.ajax({
               type: "GET",
               url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
               data: {
-                likeBasDt: date_2,
+                likeBasDt: date_7,
                 likeItmsNm: inputText
               }
             })
               .done(function (msg) {
-                date_2_price = parseInt(msg.response.body.items.item[0].clpr)
+                date_7_price = parseInt(msg.response.body.items.item[0].clpr)
               })
 
 
@@ -486,27 +767,12 @@
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
                   data: {
-                    likeBasDt: date_3,
+                    likeBasDt: date_6,
                     likeItmsNm: inputText
                   }
                 })
                   .done(function (msg) {
-                    date_3_price = parseInt(msg.response.body.items.item[0].clpr)
-                  })
-              })
-
-
-              .then((arg) => {
-                $.ajax({
-                  type: "GET",
-                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
-                  data: {
-                    likeBasDt: date_4,
-                    likeItmsNm: inputText
-                  }
-                })
-                  .done(function (msg) {
-                    date_4_price = parseInt(msg.response.body.items.item[0].clpr)
+                    date_6_price = parseInt(msg.response.body.items.item[0].clpr)
                   })
               })
 
@@ -531,27 +797,73 @@
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
                   data: {
-                    // likeBasDt: date,
+                    likeBasDt: date_4,
                     likeItmsNm: inputText
                   }
                 })
                   .done(function (msg) {
-                    console.log(msg)
-                    console.log(parseInt(msg.response.body.items.item[0].clpr) - parseInt(msg.response.body.items.item[0].vs))
+                    date_4_price = parseInt(msg.response.body.items.item[0].clpr)
+                  })
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    likeBasDt: date_3,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    date_3_price = parseInt(msg.response.body.items.item[0].clpr)
+                  })
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    likeBasDt: date_2,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    date_2_price = parseInt(msg.response.body.items.item[0].clpr)
+                  })
+              })
+
+
+              .then((arg) => {
+                $.ajax({
+                  type: "GET",
+                  url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  data: {
+                    likeBasDt: date_1,
+                    likeItmsNm: inputText
+                  }
+                })
+                  .done(function (msg) {
+                    date_1_price = parseInt(msg.response.body.items.item[0].clpr)
 
                     // 가상의 주식 데이터
                     const stockData = {
-                      labels: [date_5, date_4, date_3, date_2, date_1],
+                      labels: [date_7_label, date_6_label, date_5_label, date_4_label, date_3_label, date_2_label, date_1_label],
                       datasets: [{
                         label: msg.response.body.items.item[0].itmsNm + " 주봉(전일 대비 " + msg.response.body.items.item[0].vs + ")",
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
                         data: [
+                          date_7_price,
+                          date_6_price,
                           date_5_price,
                           date_4_price,
                           date_3_price,
-                          date_2_price - parseInt(msg.response.body.items.item[0].vs),
-                          parseInt(msg.response.body.items.item[0].clpr)],
+                          date_2_price,
+                          date_1_price],
                       }]
                     };
 
