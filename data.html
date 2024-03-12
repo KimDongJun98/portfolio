@@ -120,7 +120,7 @@
     </script>
 
 
-    <!-- 미세먼지 api
+    <!-- 미세먼지 api -->
     <script>
       function dust_Onclick() {
 
@@ -129,6 +129,7 @@
 
         $.ajax({
           type: "GET",
+          async: false,
           url: "http://openAPI.seoul.go.kr:8088/734f50696d65686438316359586c55/json/ListAvgOfSeoulAirQualityService/1/5/"
         })
           .done(function (msg) {
@@ -152,7 +153,7 @@
 
           });
       }
-    </script> -->
+    </script>
 
 
     <!-- 날씨 api -->
@@ -204,7 +205,7 @@
 
     <!-- 버튼 -->
     <button onclick="movie_Onclick()" class="btn_2">Movie</button>
-    <!-- <button onclick="dust_Onclick()" class="btn_2">Dust</button> -->
+    <button onclick="dust_Onclick()" class="btn_2">Dust</button>
     <button onclick="weather_Onclick()" class="btn_2">Weather</button>
     <button class="btn_2" onClick="location.href='http://www.naver.com'">Naver</button>
     <button class="btn_2" onClick="location.href='http://www.youtube.com'">Youtube</button>
@@ -613,6 +614,7 @@
               $.ajax({
                 type: "GET",
                 url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                async: false,
                 data: {
                   likeBasDt: date_7,
                   likeSrtnCd: inputText
@@ -627,6 +629,7 @@
                   $.ajax({
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    async: false,
                     data: {
                       likeBasDt: date_6,
                       likeSrtnCd: inputText
@@ -642,6 +645,7 @@
                   $.ajax({
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    async: false,
                     data: {
                       likeBasDt: date_5,
                       likeSrtnCd: inputText
@@ -657,6 +661,7 @@
                   $.ajax({
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    async: false,
                     data: {
                       likeBasDt: date_4,
                       likeSrtnCd: inputText
@@ -672,6 +677,7 @@
                   $.ajax({
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    async: false,
                     data: {
                       likeBasDt: date_3,
                       likeSrtnCd: inputText
@@ -687,6 +693,7 @@
                   $.ajax({
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    async: false,
                     data: {
                       likeBasDt: date_2,
                       likeSrtnCd: inputText
@@ -702,6 +709,7 @@
                   $.ajax({
                     type: "GET",
                     url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                    async: false,
                     data: {
                       likeBasDt: date_1,
                       likeSrtnCd: inputText
@@ -746,12 +754,12 @@
         // 종목명 입력 확인 조건
         else {
 
-
           new Promise((succ, fail) => {
 
             $.ajax({
               type: "GET",
               url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+              async: false,
               data: {
                 likeBasDt: date_7,
                 likeItmsNm: inputText
@@ -766,6 +774,7 @@
                 $.ajax({
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  async: false,
                   data: {
                     likeBasDt: date_6,
                     likeItmsNm: inputText
@@ -781,6 +790,7 @@
                 $.ajax({
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  async: false,
                   data: {
                     likeBasDt: date_5,
                     likeItmsNm: inputText
@@ -796,6 +806,7 @@
                 $.ajax({
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  async: false,
                   data: {
                     likeBasDt: date_4,
                     likeItmsNm: inputText
@@ -811,6 +822,7 @@
                 $.ajax({
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  async: false,
                   data: {
                     likeBasDt: date_3,
                     likeItmsNm: inputText
@@ -826,6 +838,7 @@
                 $.ajax({
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  async: false,
                   data: {
                     likeBasDt: date_2,
                     likeItmsNm: inputText
@@ -841,6 +854,7 @@
                 $.ajax({
                   type: "GET",
                   url: "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3zfq3yDcxo4Aihc0rmj6Z%2FtGXcoPpZlZacVn0tFisfDouPFeLjUecsxIz%2FKed9Zu5CknX3cBis3FeRtrA%2FV2AA%3D%3D&numOfRows=1&pageNo=1&resultType=json",
+                  async: false,
                   data: {
                     likeBasDt: date_1,
                     likeItmsNm: inputText
